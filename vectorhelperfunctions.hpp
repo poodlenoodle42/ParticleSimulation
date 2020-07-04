@@ -35,6 +35,14 @@ inline sf::Vector2f randomVector(const float maxX , const float maxY){
     return sf::Vector2f(randomX(mt),randomY(mt));
 }
 
+//returns distance and direction
+template<typename T>
+inline std::pair<float, sf::Vector2<T>> distanceDirection(const sf::Vector2<T> &from, const sf::Vector2<T> &to ){
+    sf::Vector2<T> delta = to - from;
+    sf::Vector2<T> deltaP = makePositive(delta);
+    float lenght = std::sqrt((deltaP.x * deltaP.x) + (deltaP.y * deltaP.y));
+    return std::make_pair(lenght,sf::Vector2<T>(delta.x/lenght,delta.y/lenght));
+}
 template<typename T>
 inline T lenght(sf::Vector2<T> in){
     in = makePositive(in);

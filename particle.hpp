@@ -3,6 +3,7 @@
 #include <SFML/System/Vector2.hpp>
 #include "gravityobject.hpp"
 #include <vector>
+#include <limits>
 class Particle
 {
 public:
@@ -10,7 +11,12 @@ public:
     Particle(const GravityObject &gravs, const float mass, const sf::Vector2f pos,const std::vector<Particle> * otherParticles);
     void updatePos(const float deltaTime);
     void updateSpeed(const float deltaTime);
-    void updateSpeedotherParticles(const float deltaTime,const float maxDistance);
+
+    //verySlow
+    void updateSpeedotherParticles(const float deltaTime,const float maxDistance = std::numeric_limits<float>::max());
+
+    void updateSpeedBasedOnOtherParticle(const float delatTime, Particle &p);
+
     sf::Vector2f getPosition() const;
     sf::Vector2f getSpeed() const;
 
