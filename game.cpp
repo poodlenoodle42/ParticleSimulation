@@ -17,10 +17,13 @@ Game::Game(const uint width, const uint height,const uint numberParticles,
         while(simulate){
             float deltaTime = simulationClock.restart().asSeconds();
             std::cout << 1/deltaTime << "  SPS\n";
+            uint count = 1;
             for (Particle &p : particles) {
-
                 p.updatePos(deltaTime);
-                p.updateSpeedotherParticles(deltaTime,5);
+                for(uint i = count; i<particles.size();i++)
+                    p.updateSpeedBasedOnOtherParticle(deltaTime,particles[i]);
+                count++;
+                p.updateSpeed(deltaTime);
             }
         }
     });
