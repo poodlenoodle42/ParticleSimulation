@@ -5,6 +5,7 @@
 #include <memory>
 #include "particle.hpp"
 #include <vector>
+#include <thread>
 typedef unsigned int uint;
 class Game
 {
@@ -20,6 +21,9 @@ private:
     sf::Sprite sprite;
     sf::Texture screenTexture;
     sf::Clock clock;
+    sf::Clock simulationClock;
+    std::thread simulationThread;
+    bool simulate = true;
 
     GravityObject blackHole;
 

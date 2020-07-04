@@ -13,6 +13,17 @@ Game::Game(const uint width, const uint height,const uint numberParticles,
     for(uint i = 0; i < numberParticles; i++){
         particles.push_back(Particle(blackHole,10,randomVector(width,height)));
     }
+    simulationThread = std::thread([&](){
+        while(simulate){
+            float deltaTime = simulationClock.restart().asSeconds();
+            std::cout << 1/deltaTime << "  SPS\n";
+            for (Particle &p : particles) {
+
+                p.updatePos(deltaTime);
+                p.updateSpeed(deltaTime);
+            }
+        }
+    });
     mainLoop();
 }
 
@@ -24,19 +35,17 @@ void Game::mainLoop(){
             blackHole.pos = sf::Vector2f(mousePos.x,mousePos.y);
         }
         float deltaTime = clock.restart().asSeconds();
-        std::cout << 1/deltaTime << "  FPS \n";
+        //std::cout << 1/deltaTime << "  FPS \n";
         sf::Event event;
         while (renderWindow->pollEvent(event)) {
             if(event.type == sf::Event::Closed){
+                simulate = false;
                 renderWindow->close();
+                simulationThread.join();
             }
         }
         //Update
-        for (Particle &p : particles) {
 
-            p.updatePos(deltaTime);
-            p.updateSpeed(deltaTime);
-        }
         //Rendering
         screenImage.create(width,height);
         for(const Particle &p : particles){
@@ -57,7 +66,7 @@ sf::Color Game::colorFromSpeed(float a){
     a /= 3.0f;
     a -= 6.0f;
     float b = -6.0;
-    int c = 0;
+    sf::Uint8 c = 0;
     if(a<=b){
         return sf::Color(255,0,128);
     }
