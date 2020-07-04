@@ -25,6 +25,8 @@ private:
 
     std::vector<Particle> particles;
 
+    inline sf::Color colorFromSpeed(float in);
+
 };
 
 #endif // GAME_HPP

@@ -34,4 +34,11 @@ inline sf::Vector2f randomVector(const float maxX , const float maxY){
     std::uniform_real_distribution<float> randomY(0,maxY);
     return sf::Vector2f(randomX(mt),randomY(mt));
 }
+
+template<typename T>
+inline T lenght(sf::Vector2<T> in){
+    in = makePositive(in);
+    return std::sqrt((in.x * in.x) + (in.y + in.y));
+}
+
 #endif // VECTORHELPERFUNCTIONS_HPP

@@ -9,14 +9,12 @@ Particle::Particle(const GravityObject &gravs, const float mass, const sf::Vecto
 void Particle::updatePos(const float deltaTime){
     position += speed * deltaTime;
 }
-#include <iostream>
 void Particle::updateSpeed(const float deltaTime){
     sf::Vector2f direction = normalize(gravityobject.pos - position);
     float distanceF = distance(position, gravityobject.pos);
     float force = (mass * gravityobject.mass) / (distanceF * distanceF);
     speed += ((force / mass) * deltaTime) * direction;
-    if(isnanf(speed.x))
-        std::cout << "nan\n";
+
 }
 
 sf::Vector2f Particle::getPosition() const
