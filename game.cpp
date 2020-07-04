@@ -25,10 +25,15 @@ void Game::mainLoop(){
         }
         for(uint y = 0; y < height; y++){
             for(uint x = 0;x<width;x++){
-                screenImage.setPixel(x,y,sf::Color(rand() % 255, rand() % 255, rand() % 255));
+                //screenImage.setPixel(x,y,sf::Color(rand() % 255, rand() % 255, rand() % 255));
+                screenBuffer[((x + y * width) * 4)] = rand() %255;
+                screenBuffer[((x + y * width) * 4) +1] = rand() %255;
+                screenBuffer[((x + y * width) * 4) +2] = rand() %255;
+                screenBuffer[((x + y * width) * 4) +3] = rand() %255;
+
             }
         }
-        //screenImage.create(width, height, screenBuffer);
+        screenImage.create(width, height, screenBuffer);
         screenTexture.loadFromImage(screenImage);
         renderWindow->draw(sprite);
         renderWindow->display();
