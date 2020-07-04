@@ -11,7 +11,7 @@ Game::Game(const uint width, const uint height,const uint numberParticles,
     sprite.setTexture(screenTexture);
 
     for(uint i = 0; i < numberParticles; i++){
-        particles.push_back(Particle(blackHole,10,randomVector(width,height)));
+        particles.push_back(Particle(blackHole,10,randomVector(width,height),&particles));
     }
     simulationThread = std::thread([&](){
         while(simulate){
@@ -20,7 +20,7 @@ Game::Game(const uint width, const uint height,const uint numberParticles,
             for (Particle &p : particles) {
 
                 p.updatePos(deltaTime);
-                p.updateSpeed(deltaTime);
+                p.updateSpeedotherParticles(deltaTime,5);
             }
         }
     });
