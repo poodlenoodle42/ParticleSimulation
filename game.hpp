@@ -3,11 +3,14 @@
 #include <string>
 #include <SFML/Graphics.hpp>
 #include <memory>
+#include "particle.hpp"
+#include <vector>
 typedef unsigned int uint;
 class Game
 {
 public:
-    Game(const uint width, const uint height,const std::string &windowHead);
+    Game(const uint width, const uint height, const uint numberParticles,
+         const std::string &windowHead);
 private:
     void mainLoop();
     uint width;
@@ -16,8 +19,12 @@ private:
     sf::Image screenImage;
     sf::Sprite sprite;
     sf::Texture screenTexture;
-    sf::Uint8 * screenBuffer;
     sf::Clock clock;
+
+    GravityObject blackHole;
+
+    std::vector<Particle> particles;
+
 };
 
 #endif // GAME_HPP

@@ -4,6 +4,6 @@ using namespace std;
 
 int main()
 {
-    Game g(800,600,"Particle Simulation");
+    Game g(800,600,10000,"Particle Simulation");
     return 0;
 }

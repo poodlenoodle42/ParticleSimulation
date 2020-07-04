@@ -2,6 +2,7 @@
 #define VECTORHELPERFUNCTIONS_HPP
 #include <SFML/System/Vector2.hpp>
 #include <cmath>
+#include <random>
 template<typename T>
 inline sf::Vector2<T> makePositive(const sf::Vector2<T> &in){
     sf::Vector2<T> out = in;
@@ -21,8 +22,16 @@ inline float distance(const sf::Vector2<T> &from , const sf::Vector2<T> &to){
 
 template<typename T>
 inline sf::Vector2<T> normalize(const sf::Vector2<T> &in){
-    float lenght = std::sqrt((in.x * in.x) + (in.y + in.y));
+    sf::Vector2f inP = makePositive(in);
+    float lenght = std::sqrt((inP.x * inP.x) + (inP.y + inP.y));
     return sf::Vector2<T>(in.x/lenght, in.y/lenght);
 }
 
+inline sf::Vector2f randomVector(const float maxX , const float maxY){
+    std::random_device rd;
+    std::mt19937_64 mt(rd());
+    std::uniform_real_distribution<float> randomX(0,maxX);
+    std::uniform_real_distribution<float> randomY(0,maxY);
+    return sf::Vector2f(randomX(mt),randomY(mt));
+}
 #endif // VECTORHELPERFUNCTIONS_HPP

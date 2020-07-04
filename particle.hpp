@@ -9,6 +9,9 @@ public:
     Particle(const GravityObject &gravs, const float mass, const sf::Vector2f pos);
     void updatePos(const float deltaTime);
     void updateSpeed(const float deltaTime);
+    sf::Vector2f getPosition() const;
+    sf::Vector2f getSpeed() const;
+
 private:
     sf::Vector2f position;
     sf::Vector2f speed;
