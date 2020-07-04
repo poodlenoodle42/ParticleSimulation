@@ -2,6 +2,7 @@
 #define GAME_HPP
 #include <string>
 #include <SFML/Graphics.hpp>
+#include <SFML/OpenGL.hpp>
 #include <memory>
 typedef unsigned int uint;
 class Game
@@ -13,11 +14,9 @@ private:
     uint width;
     uint height;
     std::unique_ptr<sf::RenderWindow> renderWindow;
-    sf::Image screenImage;
-    sf::Sprite sprite;
-    sf::Texture screenTexture;
-    sf::Uint8 * screenBuffer;
     sf::Clock clock;
+    unsigned char * buffer;
+
 };
 
 #endif // GAME_HPP
