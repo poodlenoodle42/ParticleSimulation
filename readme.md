@@ -25,13 +25,13 @@ This is the default branch. His name represents the drawing method I choose for 
 To build it you must install SFML2.5 for your system.
 Use QtCreator or the default QMake Build Steps for your System.
 For Linux it is 
-```bash
-qmake ParticleSimulation.pro -spec linux-g++```
+`bash
+qmake ParticleSimulation.pro -spec linux-g++`
 
-```bash make -j4```
+`bash make -j4`
 
 and at the end 
-```bash make clean -j4```
+`bash make clean -j4`
 to clean your build enviroment.
 
 
